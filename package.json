@@ -1,0 +1,18 @@
+{
+  "name": "minhoteca-fn-adualizador-acervo",
+  "version": "1.0.0",
+  "description": "Atualizador de acervo da Minhoteca",
+  "main": "src/updateAcervo.js",
+  "bin": {
+    "update-acervo": "bin/update-acervo.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "minhoteca",
+    "acervo",
+    "catalogo"
+  ],
+  "license": "MIT"
+}
