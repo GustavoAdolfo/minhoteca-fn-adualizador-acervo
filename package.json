@@ -1,5 +1,5 @@
 {
-  "name": "minhoteca-fn-adualizador-acervo",
+  "name": "minhoteca-fn-atualizador-acervo",
   "version": "1.0.0",
   "description": "Atualizador de acervo da Minhoteca",
   "main": "src/updateAcervo.js",
