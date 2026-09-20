@@ -12,17 +12,19 @@ function normalizeCollection(collection, label) {
       throw new TypeError(`${label}[${index}] must be an object.`);
     }
 
-    if (item.id === undefined || item.id === null || item.id === '') {
+    const id = typeof item.id === 'string' ? item.id.trim() : item.id;
+
+    if (id === undefined || id === null || id === '') {
       throw new TypeError(`${label}[${index}] must include a non-empty id.`);
     }
 
-    if (seenIds.has(item.id)) {
-      throw new TypeError(`${label}[${index}] has a duplicate id: ${item.id}.`);
+    if (seenIds.has(id)) {
+      throw new TypeError(`${label}[${index}] has a duplicate id: ${id}.`);
     }
 
-    seenIds.add(item.id);
+    seenIds.add(id);
 
-    return item;
+    return { ...item, id };
   });
 }
 

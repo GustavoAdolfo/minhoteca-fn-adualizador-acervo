@@ -33,6 +33,13 @@ test('rejects records without an id', () => {
   );
 });
 
+test('rejects whitespace-only ids', () => {
+  assert.throws(
+    () => updateAcervo([{ id: '1' }], [{ id: '   ', titulo: 'Sem identificador' }]),
+    /incomingCollection\[0\] must include a non-empty id\./
+  );
+});
+
 test('rejects duplicate ids in the incoming collection', () => {
   assert.throws(
     () =>
