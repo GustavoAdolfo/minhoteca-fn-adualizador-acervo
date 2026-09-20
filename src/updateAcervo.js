@@ -5,6 +5,8 @@ function normalizeCollection(collection, label) {
     throw new TypeError(`${label} must be an array.`);
   }
 
+  const seenIds = new Set();
+
   return collection.map((item, index) => {
     if (!item || typeof item !== 'object' || Array.isArray(item)) {
       throw new TypeError(`${label}[${index}] must be an object.`);
@@ -13,6 +15,12 @@ function normalizeCollection(collection, label) {
     if (item.id === undefined || item.id === null || item.id === '') {
       throw new TypeError(`${label}[${index}] must include a non-empty id.`);
     }
+
+    if (seenIds.has(item.id)) {
+      throw new TypeError(`${label}[${index}] has a duplicate id: ${item.id}.`);
+    }
+
+    seenIds.add(item.id);
 
     return item;
   });

@@ -33,6 +33,17 @@ test('rejects records without an id', () => {
   );
 });
 
+test('rejects duplicate ids in the incoming collection', () => {
+  assert.throws(
+    () =>
+      updateAcervo([{ id: '1' }], [
+        { id: '2', titulo: 'Livro A' },
+        { id: '2', titulo: 'Livro B' }
+      ]),
+    /incomingCollection\[1\] has a duplicate id: 2\./
+  );
+});
+
 test('cli prints the merged collection', () => {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'minhoteca-acervo-'));
   const currentPath = path.join(tempDir, 'current.json');
