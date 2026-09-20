@@ -1,4 +1,4 @@
-# minhoteca-fn-adualizador-acervo
+# minhoteca-fn-atualizador-acervo
 Atualizador de acervo da Minhoteca
 
 Ferramenta Node.js para atualizar um acervo em JSON a partir de uma carga incremental.

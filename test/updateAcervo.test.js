@@ -58,3 +58,28 @@ test('cli prints the merged collection', () => {
     { id: '2', titulo: 'Livro B', status: 'emprestado' }
   ]);
 });
+
+test('cli writes the merged collection to the output file when provided', () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'minhoteca-acervo-output-'));
+  const currentPath = path.join(tempDir, 'current.json');
+  const incomingPath = path.join(tempDir, 'incoming.json');
+  const outputPath = path.join(tempDir, 'output.json');
+
+  fs.writeFileSync(currentPath, JSON.stringify([{ id: '1', titulo: 'Livro A' }]));
+  fs.writeFileSync(incomingPath, JSON.stringify([{ id: '1', status: 'disponivel' }]));
+
+  execFileSync(
+    process.execPath,
+    [
+      path.resolve(__dirname, '../bin/update-acervo.js'),
+      currentPath,
+      incomingPath,
+      outputPath
+    ],
+    { encoding: 'utf8' }
+  );
+
+  assert.deepEqual(JSON.parse(fs.readFileSync(outputPath, 'utf8')), [
+    { id: '1', titulo: 'Livro A', status: 'disponivel' }
+  ]);
+});
